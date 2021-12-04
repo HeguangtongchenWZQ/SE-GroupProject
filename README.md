@@ -7,7 +7,7 @@
 
 1、目前已实现模型的建立：正确率如下
 
-![image-20211204154810636](https://gitee.com/wuzhengqian/my-copy-picture/raw/master/img/202112041548696.png)
+![image-20211204235932664](https://gitee.com/wuzhengqian/my-copy-picture/raw/master/img/202112042359985.png)
 
 2、实现了第一阶段的网页功能，能够实时根据用户上传的csv文件，判别渔船的作业方式
 
