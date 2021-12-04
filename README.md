@@ -5,7 +5,20 @@
 - 能够根据用户上传的csv文件，动态显示用户在海域内的作业的位置和运动方向
 - 若时间充足，可以基于源数据集，生成全部数据的作业方式，实现海域位置、运动可视化，即可以在地图上看见各片海域的船只作业方式，方便渔民在适合的海域使用适当的作业方式
 
-目前已实现模型的大概建立：正确率如下
+1、目前已实现模型的建立：正确率如下
 
-![image-20211120105716743](https://gitee.com/wuzhengqian/my-copy-picture/raw/master/img/202111201147349.png)
+![image-20211204154810636](https://gitee.com/wuzhengqian/my-copy-picture/raw/master/img/202112041548696.png)
 
+2、实现了第一阶段的网页功能，能够实时根据用户上传的csv文件，判别渔船的作业方式
+
+![图片1](https://gitee.com/wuzhengqian/my-copy-picture/raw/master/img/202112041549175.jpeg)
+
+![图片2](https://gitee.com/wuzhengqian/my-copy-picture/raw/master/img/202112041549089.jpeg)
+
+![image-20211204153414170](https://gitee.com/wuzhengqian/my-copy-picture/raw/master/img/202112041549262.png)
+
+
+
+3、第二阶段可视化部分，实现了用户注册登录后识别可视化的限制访问，作业轨迹可视化尚未实现。
+
+![image-20211204153812057](https://gitee.com/wuzhengqian/my-copy-picture/raw/master/img/202112041549202.png)
