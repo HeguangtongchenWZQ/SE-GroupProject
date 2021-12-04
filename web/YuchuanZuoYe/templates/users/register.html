@@ -1,0 +1,36 @@
+{% extends "YuchuanZuoYe/base.html" %}
+
+{% block content %}
+<style>
+input {
+    outline-style: none;
+    background-color:#fff;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    width: 20vw;
+    height: 3vw;
+    margin-top: 5px;
+}
+
+#um {
+    margin-top: 10px;
+}
+
+input:focus {/*发光*/
+    border-color: #ffff;
+    outline: f;
+
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6)
+}
+
+</style>
+   <form method='post' action="{% url 'users:register' %}">
+   {% csrf_token %}
+    {{ form.as_p }}
+
+    <button  class="btn btn-primary" name = 'submit'>register</button>
+    <input  type="hidden" name="next" value ="{% url 'YuchuanZuoYe:index' %}" />
+  </form>
+
+{% endblock content %}

@@ -1,0 +1,117 @@
+{% include "YuchuanZuoYe/base.html" %}
+
+<head>
+     <meta charset="UTF-8">
+        <style>
+        .text{
+            background-image: -webkit-linear-gradient(left,blue,#66ffff 10%,#cc00ff 20%,#CC00CC 30%, #CCCCFF 40%, #00FFFF 50%,#CCCCFF 60%,#CC00CC 70%,#CC00FF 80%,#66FFFF 90%,blue 100%);
+            -webkit-text-fill-color: transparent;/* 将字体设置成透明色 */
+            -webkit-background-clip: text;/* 裁剪背景图，使文字作为裁剪区域向外裁剪 */
+            -webkit-background-size: 200% 100%;
+            -webkit-animation: masked-animation 4s linear infinite;
+        }
+        @keyframes masked-animation {
+            0% {
+                background-position: 0  0;
+            }
+            100% {
+                background-position: -100%  0;
+            }
+        }
+
+}
+.title {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    left: 0;
+    right: 0;
+    top: 300px;
+    margin: auto;
+    bottom: 0;
+    color: #fff;
+    font-size: 24px;
+    font-weight: 500;
+}
+.home {
+    height: 100%;
+    overflow: hidden;
+}
+
+.bgc {
+    width: 100%;
+}
+.form_input {
+    padding: 0 30px;
+    box-sizing: border-box;
+    display: flex;
+    margin-top: 20px;
+}
+
+.form {
+    overflow: hidden;
+    position: relative;
+}
+.submit {
+    position: absolute;
+    z-index: 9;
+    left: 40;
+    top: 100;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    margin-top: 150px;
+    width: 700px;
+    height: 200px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+</style>
+
+</head>
+
+<html>
+
+<body >
+<!--<title>渔船作业识别</title>-->
+<!--<div class="form">-->
+<!--    <img class="bgc" src="/static/img/FJ.png" alt="">-->
+<!--<div class="submit">-->
+
+     <h1 class="text"style="margin-left:500px;margin-top:-20px">上传你的数据文件（.csv格式）</h1>
+
+     <form action="{% url 'YuchuanZuoYe:classfication1' %}" enctype="multipart/form-data" method="post">
+           <input type="file"  name='test' accept=".csv"style="margin-left:600px;margin-top:20px" />
+         {% csrf_token %}
+         {{form.as_p}}
+<!--通过设置margin-left, margin-top属性来实现将一个按钮放到离上边和左边各500像素的地方-->
+      <button name="submit" class="btn btn-primary"style="margin-left:800px;margin-top:-30px">提交</button>
+
+         {% csrf_token %}
+         {{form.as_p}}
+         <div class="submit">
+<!--通过设置margin-left, margin-top属性来实现将一个按钮放到离上边和左边各500像素的地方-->
+<!--      <button name="submit" class="btn btn-primary"style="margin-left:800px;margin-top:-30px">提交</button>-->
+<!--         <div class="form_input">-->
+    <div>
+        <h3 >预测结果是：{{ result }}</h3>
+         <h3 style="text-indent:2em;">{{ data }}</h3>
+    </div>
+   <div >点击了解更多：
+         <a href={{urls}}>{{urls}}</a>
+   </div>
+
+         </div>
+     </form>
+<!--</div>-->
+<!--</div>-->
+
+<!--</div>-->
+ </body> {% block header %}
+
+{% endblock %}
+</html>

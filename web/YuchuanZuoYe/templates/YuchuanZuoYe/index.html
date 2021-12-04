@@ -1,0 +1,82 @@
+{% extends "YuchuanZuoYe/base.html" %}
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>定义input type="file" 的样式</title>
+	<style type="text/css">
+	body{
+		font-size:14px;
+		align-text:center;
+	    }
+	input{
+		vertical-align:middle;
+		margin:0;
+		padding:0
+	     }
+	.file-box{
+		position:relative;
+		width:340px;
+		margin:0px auto;
+	}
+	.txt{
+		height:22px;
+		border:1px solid #cdcdcd;
+		width:180px;
+	}
+	.btn{
+		background-color:#FFF;
+		border:1px solid #CDCDCD;
+		height:24px;
+		width:70px;
+	}
+	.file{
+		position:absolute;
+		top:0;
+		right:80px;
+		height:24px;
+		filter:alpha(opacity:0);
+		opacity: 0;
+		width:260px
+	}
+	.text{
+            background-image: -webkit-linear-gradient(left,blue,#66ffff 10%,#cc00ff 20%,#CC00CC 30%, #CCCCFF 40%, #00FFFF 50%,#CCCCFF 60%,#CC00CC 70%,#CC00FF 80%,#66FFFF 90%,blue 100%);
+            -webkit-text-fill-color: transparent;/* 将字体设置成透明色 */
+            -webkit-background-clip: text;/* 裁剪背景图，使文字作为裁剪区域向外裁剪 */
+            -webkit-background-size: 200% 100%;
+            -webkit-animation: masked-animation 4s linear infinite;
+        }
+      @keyframes masked-animation {
+            0% {
+                background-position: 0  0;
+            }
+            100% {
+                background-position: -100%  0;
+            }
+        }
+	</style>
+	</head>
+	<body>
+		<div class="file-box">
+		<form action="" method="post" enctype="multipart/form-data">
+			<input type='text' name='textfield' id='textfield' class='txt' />
+			<input type='button' class='btn' value='浏览...' />
+			<input type="file" name="fileField" class="file" id="fileField" size="28" onchange="document.getElementByI		('textfield').value=this.value" />
+			<input type="submit" name="submit" class="btn" value="上传" onclick=""/>
+		</form>
+	</div>
+	</body>
+{% block header %}
+  <div class='jumbotron'>
+      <h1 class="text">想知道别人家的船是咋干活的吗？</h1>
+  </div>
+{% endblock %}
+
+{% block content %}
+  <h2>
+    <a href="{% url 'users:register' %}">注册账户</a>可以实现地图可视化，游客仅可返回识别结果
+  </h2>
+  <h2>
+    上传一个观测数据的csv文件，根据观测数据预测渔船的作业方式
+  </h2>
+{% endblock %}
+<title>渔船作业识别</title>
+

@@ -1,0 +1,177 @@
+{% include "YuchuanZuoYe/base.html" %}
+{% block header %}
+<head>
+     <meta charset="UTF-8">
+        <style>
+        .text{
+            background-image: -webkit-linear-gradient(left,blue,#66ffff 10%,#cc00ff 20%,#CC00CC 30%, #CCCCFF 40%, #00FFFF 50%,#CCCCFF 60%,#CC00CC 70%,#CC00FF 80%,#66FFFF 90%,blue 100%);
+            -webkit-text-fill-color: transparent;/* 将字体设置成透明色 */
+            -webkit-background-clip: text;/* 裁剪背景图，使文字作为裁剪区域向外裁剪 */
+            -webkit-background-size: 200% 100%;
+            -webkit-animation: masked-animation 4s linear infinite;
+        }
+        @keyframes masked-animation {
+            0% {
+                background-position: 0  0;
+            }
+            100% {
+                background-position: -100%  0;
+            }
+        }
+
+}
+.title {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    left: 0;
+    right: 0;
+    top: 300px;
+    margin: auto;
+    bottom: 0;
+    color: #fff;
+    font-size: 24px;
+    font-weight: 500;
+}
+.home {
+    height: 100%;
+    overflow: hidden;
+}
+.form_input {
+    padding: 0 30px;
+    box-sizing: border-box;
+    display: flex;
+    margin-top: 20px;
+}
+
+.form {
+    overflow: hidden;
+    position: relative;
+}
+.submit {
+    position: absolute;
+    z-index: 9;
+    left: 40;
+    top: 100;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    margin-top: 150px;
+    width: 700px;
+    height: 200px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+
+    display: flex;
+    flex-direction: column;
+}
+    </style>
+
+
+</head>
+
+<html>
+ <title>渔船作业识别</title>
+
+<body>
+
+<!--    <img class="bgc" src="/static/img/FJ.png" width="100%" alt="">-->
+     <h1 class="text"style="margin-left:500px;margin-top:-20px">上传你的数据文件（.csv格式）</h1>
+
+     <form action="{% url 'YuchuanZuoYe:classfication2' %}" enctype="multipart/form-data" method="post">
+           <input type="file"  name='test' accept=".csv"style="margin-left:600px;margin-top:20px" />
+         {% csrf_token %}
+         {{form.as_p}}
+<!--通过设置margin-left, margin-top属性来实现将一个按钮放到离上边和左边各500像素的地方-->
+      <button name="submit" class="btn btn-primary"style="margin-left:800px;margin-top:-30px">提交</button>
+
+     </form>
+
+ </body>
+{% endblock %}
+<html>
+ <title>渔船作业识别结果可视化</title>
+
+<meta charset="utf-8"/> 
+<title>异步加载</title> 
+<script type="text/javascript"> 
+function initialize() { 
+  var mp = new BMapGL.Map('map'); 
+  mp.centerAndZoom(new BMapGL.Point(121.491, 31.233), 11); 
+} 
+    
+function loadScript() { 
+  var script = document.createElement("script"); 
+  script.src = "https://api.map.baidu.com/api?v=1.0&type=webgl&ak=fj33nQSNAsM2ZIzsP3zfGrvSSuiGKxaN&callback=initialize";
+  document.body.appendChild(script); 
+} 
+    
+window.onload = loadScript; 
+</script> 
+</head> 
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+	<style type="text/css">
+	body, html,#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
+	</style>
+	<script type="text/javascript" src="//api.map.baidu.com/api?type=webgl&v=1.0&ak=fj33nQSNAsM2ZIzsP3zfGrvSSuiGKxaN"></script>
+	<title>添加控件</title>
+</head>
+<body>
+ <div class="submit">
+<!--通过设置margin-left, margin-top属性来实现将一个按钮放到离上边和左边各500像素的地方-->
+<!--      <button name="submit" class="btn btn-primary"style="margin-left:800px;margin-top:-30px">提交</button>-->
+<!--         <div class="form_input">-->
+    <div>
+        <h3 >预测结果是：{{ result }}</h3>
+         <h3 style="text-indent:2em;">{{ data }}</h3>
+    </div>
+   <div >点击了解更多：
+         <a href={{urls}}>{{urls}}</a>
+   </div>
+
+         </div>
+	<div  class="row bg-info row_box_height" style="overflow: auto;" id="allmap" class="map"></div>
+</body>
+</html>
+<script type="text/javascript">
+    // GL版命名空间为BMapGL
+    // 按住鼠标右键，修改倾斜角和角度
+	var map = new BMapGL.Map("allmap");    // 创建Map实例
+	map.centerAndZoom(new BMapGL.Point(116.404, 39.915), 11);  // 初始化地图,设置中心点坐标和地图级别
+    map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+    var scaleCtrl = new BMapGL.ScaleControl();  // 添加比例尺控件
+    map.addControl(scaleCtrl);
+    var zoomCtrl = new BMapGL.ZoomControl();  // 添加比例尺控件
+    map.addControl(zoomCtrl);
+	//添加标注
+	var point = new BMapGL.Point(116.404, 39.915);   
+	var marker = new BMapGL.Marker(point);        // 创建标注   
+	map.addOverlay(marker);                     // 将标注添加到地图中
+	var myIcon = new BMapGL.Icon("markers.png", new BMapGL.Size(23, 25), {   
+    	// 指定定位位置。  
+    	// 当标注显示在地图上时，其所指向的地理位置距离图标左上   
+    	// 角各偏移10像素和25像素。您可以看到在本例中该位置即是  
+    	// 图标中央下端的尖角位置。   
+    	anchor: new BMapGL.Size(10, 25),   
+    	// 设置图片偏移。  
+    	// 当您需要从一幅较大的图片中截取某部分作为标注图标时，您  
+    	// 需要指定大图的偏移位置，此做法与css sprites技术类似。   
+    	imageOffset: new BMapGL.Size(0, 0 - 25)   // 设置图片偏移   
+	}); 
+	marker.addEventListener("click", function(){   
+    	alert("您点击了标注");   
+	});    
+    // 创建标注对象并添加到地图  
+//var marker = new BMapGL.Marker(point, {icon: myIcon});   
+//map.addOverlay(marker); 
+	//绘图代码
+	//var polyline = new BMapGL.Polyline([
+	//	new BMapGL.Point(116.399, 39.910),
+	// 	new BMapGL.Point(116.405, 39.920),
+	// 	new BMapGL.Point(116.425, 39.900)
+	// ], {strokeColor:"blue", strokeWeight:2, strokeOpacity:0.5});
+	//map.addOverlay(polyline);
+</script>
+</html>
