@@ -22,3 +22,5 @@
 3、第二阶段可视化部分，实现了用户注册登录后识别可视化的限制访问，作业轨迹可视化尚未实现。
 
 ![image-20211204153812057](https://gitee.com/wuzhengqian/my-copy-picture/raw/master/img/202112041549202.png)
+
+4、已全部实现既定目标
